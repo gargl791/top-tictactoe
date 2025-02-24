@@ -70,37 +70,44 @@ function GameController() {
     const board = GameBoard();
 
     const players = [ Player("Player One", 1), Player("Player Two", 2)]
+    const activePlayer = players[0];
 
-    function changePlayerTurn(activePlayer){
-        return activePlayer === 1 ? 2 : 1;
+    function changePlayerTurn(){
+        activePlayer = activePlayer === players[0] ? players[1] : players[0];
     };
 
     //using the indexes of the 2d array from 0 - 8. summing the indexes by player token % 3 == 0 means a win
     function checkGameStatus(activePlayer){
         let points = 0;
         let currentCell;
+        let availablePositions = 0;
         let currentState = gameBoard.getGameBoard();
         for(let r=0; r < gameBoard.length; r++){
             for(let c=0; c<gameBoard[r].length; c++){
-                
+                if(currentCell.getToken() !== 0) {
+                    availablePositions++;
+                }
                 if(currentCell.getToken === activePlayer.getToken()) {
-                    if (r == 0) {
+                    if (r === 0) {
                         points += c;
                     }
                     else {
-                        points += r * c;
+                        points += (r * c);
                     }
                 }
             }
         }
-        if(points % 3 == 0) {
+        //This outcome means a draw.
+        if(availablePositions === 9 && points % 3 !== 0) {
+            console.log("Tie - No one wins");
+        } 
+        else if(points % 3 === 0) {
             console.log(`${activePlayer} wins`)
         }
-
     };
 
     function nextGame() {
-        
+
     };
 }
 
