@@ -81,7 +81,7 @@ function GameController() {
         let points = 0;
         let currentCell;
         let availablePositions = 0;
-        let currentState = gameBoard.getGameBoard();
+        let currentState = gameBoard;
         for(let r=0; r < gameBoard.length; r++){
             for(let c=0; c<gameBoard[r].length; c++){
                 if(currentCell.getToken() !== 0) {
@@ -109,6 +109,17 @@ function GameController() {
     function nextGame() {
 
     };
+}
+
+function ScreenController() {
+    let grid = document.getElementById("#board");
+    for(let i = 0; i < 3; i++){
+        for(let j = 0; j < 3; j++) {
+            let divBlock = document.createElement("div");
+            let cell = document.createElement("button");
+            divBlock.appendChild(cell);
+        }
+    }
 }
 
 
